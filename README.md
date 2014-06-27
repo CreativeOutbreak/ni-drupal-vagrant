@@ -75,20 +75,51 @@ Then reload Vagrant.
 $ vagrant reload
 ```
 NOTE:  The config file has probably already been changed to use NFS.  
-##### All Done!  
+### All Done!  
 You should now be able to browse to [drupal8.dev][12] and see the Drupal 8 site.
 
+### Sharing with other devices
+OK, I know I just said you where all done, but when is that really ever the truth! ;)  
+This next step is very easy and also very usefull!  Vagrant offers a free cloud service for sharing you Vagrant box with other devices anywhere that has an internet connection.  
+This is particularly helpfull if you want to test it on you mobile device or do a demo at an Annual Meeting...  
+You can make a free cloud account at [Vagrant Cloud][14] or if you're feeling lazy, you can uses my one:
+```
+username: pjstew
+password: schlumpf
+```
 
-[1]: http://www.vagrantup.com/      "Vagrant - Main site"
-[2]: https://www.drupal.org/       "Dupal - Main site"
-[3]: http://www.getchef.com/         "Chef - Main site"
-[4]: http://git-scm.com/            "Git - Main site"
-[5]: https://www.virtualbox.org/wiki/Downloads      "VirtualBox - Download page"
-[6]: http://www.vagrantup.com/downloads.html        "Vagrant - Dowload page"
-[7]: http://docs.vagrantup.com/v2/installation/index.html       "Vagrant - Install page"
-[8]: http://docs.vagrantup.com/v2/getting-started/index.html    "Vagrant - Getting started"
-[9]: https://www.drupal.org/node/2008758                        "VDD - Documentation"
-[10]: https://github.com/CreativeOutbreak/ni-drupal-vagrant/blob/master/config.json "Chef config - Default"
-[11]: https://github.com/CreativeOutbreak/ni-drupal-vagrant/blob/master/config.json#L16-L38 "Chef - Drupal config"
+now you know that and you've got you Vagrant box running, you can just type the following code and it will give you a cloud url to share.
+```
+$ vagrant login
+$ vagrant share
+```
+
+That's it for now.
+
+
+[1]: http://www.vagrantup.com/
+"Vagrant - Main site"
+[2]: https://www.drupal.org/
+"Dupal - Main site"
+[3]: http://www.getchef.com/
+"Chef - Main site"
+[4]: http://git-scm.com/
+"Git - Main site"
+[5]: https://www.virtualbox.org/wiki/Downloads
+"VirtualBox - Download page"
+[6]: http://www.vagrantup.com/downloads.html
+"Vagrant - Dowload page"
+[7]: http://docs.vagrantup.com/v2/installation/index.html
+"Vagrant - Install page"
+[8]: http://docs.vagrantup.com/v2/getting-started/index.html
+"Vagrant - Getting started"
+[9]: https://www.drupal.org/node/2008758
+"VDD - Documentation"
+[10]: https://github.com/CreativeOutbreak/ni-drupal-vagrant/blob/master/config.json
+"Chef config - Default"
+[11]: https://github.com/CreativeOutbreak/ni-drupal-vagrant/blob/master/config.json#L16-L38
+"Chef - Drupal config"
 [12]: http://drupal8.dev
 "Drupal 8 install - Local Vagrant Box"
+[14]: https://vagrantcloud.com/
+"Vagrant Cloud - Main site"
