@@ -45,6 +45,33 @@ Now you've got a Drupal 8 install up and running, all you need to do is add some
 # End of sites declared with VDD
 ```
 
+##### VirtualBox shared file
+VirtualBox shared directories are slow. We can fix the problem by using NFS synced folders. Unfortunately NFS doesn’t work on Windows.  
+To install NFS run:
+```
+$ sudo apt-get install nfs-kernel-server
+```
+Then change the type of synced folders to nfs in your config.json.  
+Find next lines inside your config.json.
+```
+"synced_folders": [
+    {
+      "host_path": "data/",
+      "guest_path": "/var/www",
+      "type": "default"
+    }
+  ],
+```
+Replace default with nfs.
+```
+"type": "nfs"
+```
+Then reload Vagrant.
+```
+$ vagrant reload
+```
+NOTE:  The config file has probably already been changed to use NFS.  
+##### All Done!  
 You should now be able to browse to [drupal8.dev][12] and see the Drupal 8 site.
 
 
