@@ -1,12 +1,12 @@
 {
   "vm": {
-    "ip": "192.168.44.44",
+    "ip": "192.168.83.44",
     "memory": "1024",
     "synced_folders": [
       {
         "host_path": "data/",
         "guest_path": "/var/www",
-        "type": "default"
+        "type": "nfs"
       }
     ],
     "forwarded_ports": []

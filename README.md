@@ -2,6 +2,7 @@
 We've now setup our [Drupal][2] development enviroment using [Vagrant][1] & [Chef][3] for collaboration, demonstration and deployment reasons. We are using the [Vagrant Drupal Development (VDD)][9] preconfigured setup.
 ### Setting up and running
 #### Cloning Repository
+IMPORTANT NOTE: If you have an encrypted home directory, make sure you don't put the files there, otherwise you'll end up in a world of pain when you try to setup NFS!!!  
 First thing to do is to browser to where you want to work on your local machine and clone this repo. Here is some example code for making a folder in your home directory call *ni_dev* and cloning this repo to there.
 ```shell
 $ sudo mkdir ~/ni_dev
@@ -11,6 +12,7 @@ $ sudo git clone https://github.com/CreativeOutbreak/ni-drupal-vagrant.git
 If you don't have [git][4] installed, install it! ;)
 Then run the previous code.
 #### Setting up & running Vagrant
+IMPORTANT NOTE: If you have an encrypted home directory, make sure you don't put the files there, otherwise you'll end up in a world of pain when you try to setup NFS!!!  
 Now you've got your working directory set up, it's time to get the Vagrant server running.  
 [Vagrant][6] uses [VirtualBox][5], so you need to download both of them to start with.  
 You may also find the [Vagrant instalation page][7] and [getting started guid][8] helpfull.  Vagrant is verry well documented!
@@ -46,6 +48,8 @@ Now you've got a Drupal 8 install up and running, all you need to do is add some
 ```
 
 ##### VirtualBox shared file
+IMPORTANT NOTE: If you have an encrypted home directory, make sure you don't put the files there, otherwise you'll end up in a world of pain when you try to setup NFS!!!
+IMPORTANT NOTE: NFS does not work on Windows machine!  If you're planning on using Windows you'll have to deal with it running slow... You should probably be used to that by now though ;)     
 VirtualBox shared directories are slow. We can fix the problem by using NFS synced folders. Unfortunately NFS doesn’t work on Windows.  
 To install NFS run:
 ```
