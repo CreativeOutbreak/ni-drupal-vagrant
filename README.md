@@ -35,8 +35,17 @@ cd ~/sites/drupal8
 git clone --branch 8.x http://git.drupal.org/project/drupal.git .
 drush @drupal8 si standard -y
 ```
+Now you've got a Drupal 8 install up and running, all you need to do is add some code to your *'host'* file:
+```
+# Sites declared in VDD's config.json
+    192.168.44.44 drupal8.dev
+    192.168.44.44 www.drupal8.dev
+    192.168.44.44 drupal7.dev
+    192.168.44.44 www.drupal7.dev
+# End of sites declared with VDD
+```
 
-
+You should now be able to browse to [drupal8.dev][12] and see the Drupal 8 site.
 
 
 [1]: http://www.vagrantup.com/      "Vagrant - Main site"
@@ -50,3 +59,5 @@ drush @drupal8 si standard -y
 [9]: https://www.drupal.org/node/2008758                        "VDD - Documentation"
 [10]: https://github.com/CreativeOutbreak/ni-drupal-vagrant/blob/master/config.json "Chef config - Default"
 [11]: https://github.com/CreativeOutbreak/ni-drupal-vagrant/blob/master/config.json#L16-L38 "Chef - Drupal config"
+[12]: http://drupal8.dev
+"Drupal 8 install - Local Vagrant Box"
