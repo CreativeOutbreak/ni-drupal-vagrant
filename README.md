@@ -18,7 +18,8 @@ You may also find the [Vagrant instalation page][7] and [getting started guid][8
 Now you've got them both install we'll move onto running the Vagrant box.
 
 #### Running Vagrant
-Fortunately, this couldn't really be simpler!  If you're not already in the working directory, browser to it `cd ~/ni_dev` and then run `vagrant up`.
+Fortunately, this couldn't really be simpler!  If you're not already in the working directory, browser to it `cd ~/ni_dev` and then run `vagrant up`. This may take a few minutes the first time, as it need to download a linux box and then set it all up with the *bootstrap.sh* config.
+NOTE: *Shouldn't take more than 10 minutes, but may do if you have a slow connection.  It will tell you when it's done.*
 
 [1]: http://www.vagrantup.com/      "Vagrant - Main site"
 [2]: https://www.drupal.org/       "Dupal - Main site"
