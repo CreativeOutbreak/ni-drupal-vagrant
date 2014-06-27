@@ -97,7 +97,7 @@ $ vagrant share
 That's it for now.
 
 Oh, one last this, if you're using Vagrant Share, the Drupal instances will be at [cloud url]/[drupal version]  
-e.g. http://sluggish-crow-1822.vagrantshare.com/drupal8
+i.e. http://sluggish-crow-1822.vagrantshare.com/drupal8
 
 
 [1]: http://www.vagrantup.com/
