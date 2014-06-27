@@ -11,14 +11,14 @@ sudo git clone https://github.com/CreativeOutbreak/ni-drupal-vagrant.git
 If you don't have [git][4] installed, install it! ;)
 Then run the previous code.
 #### Setting up & running Vagrant
-Now you've got your working directory set up, it's time to get the Vagrant server running.
-[Vagrant][6] uses [VirtualBox][5], so you need to download both of them to start with.
+Now you've got your working directory set up, it's time to get the Vagrant server running.  
+[Vagrant][6] uses [VirtualBox][5], so you need to download both of them to start with.  
 You may also find the [Vagrant instalation page][7] and [getting started guid][8] helpfull.  Vagrant is verry well documented!
 
 Now you've got them both install we'll move onto running the Vagrant box.
 
 #### Running Vagrant
-Fortunately, this couldn't really be simpler!  If you're not already in the working directory, browser to it `cd ~/ni_dev` and then run `vagrant up`. This may take a while the first time, as it need to download a linux box and then set it all up with the [Chef][3] config.
+Fortunately, this couldn't really be simpler!  If you're not already in the working directory, browser to it `cd ~/ni_dev` and then run `vagrant up`. This may take a while the first time, as it need to download a linux box and then set it all up with the [Chef][3] config.  
 NOTE: *Shouldn't take around 10 minutes, but may be longer if you have a slow connection.  It will tell you when it's done.*
 
 [1]: http://www.vagrantup.com/      "Vagrant - Main site"
