@@ -10,6 +10,7 @@ before_install:
   - composer self-update
   #- pear channel-discover pear.drush.org
 install:
+  - pear channel-discover pear.drush.org
   - pear install drush/drush
   - phpenv rehash
 before_script:
