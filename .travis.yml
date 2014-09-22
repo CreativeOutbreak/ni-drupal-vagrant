@@ -1,18 +1,17 @@
 language: php
 php:
     - 5.4
-    - hhvm
+    - 5.5 
 mysql:
     database: drupal
     username: root
     encoding: utf8
 before_install:
-  - composer self-update
-  #- pear channel-discover pear.drush.org
+    - composer self-update
+    - pear channel-discover pear.drush.org
 install:
-  - pear channel-discover pear.drush.org
-  - pear install drush/drush
-  - phpenv rehash
+    - pear install drush/drush
+    - phpenv rehash
 before_script:
     - drush dl --yes drupal
     - cd drupal-*
@@ -25,4 +24,4 @@ before_script:
 script: drush test-run Syslog --xml --uri=http://127.0.0.1:8080
 matrix:
     allow_failures:
-        - php: hhvm
+        - php: 5.5
