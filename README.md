@@ -99,6 +99,10 @@ That's it for now.
 Oh, one last this, if you're using Vagrant Share, the Drupal instances will be at [cloud url]/[drupal version]  
 i.e. http://sluggish-crow-1822.vagrantshare.com/drupal8
 
+### Testing with travis.ci
+We're planning on using travis.ci for testing, but it's not fully configured yet, so the image bellow may be missleading.
+[![Build Status](https://magnum.travis-ci.com/CreativeOutbreak/ni-drupal-vagrant.svg?token=pHYqJrPvsqt1qq46MxZd&branch=master)](https://magnum.travis-ci.com/CreativeOutbreak/ni-drupal-vagrant)
+
 
 [1]: http://www.vagrantup.com/
 "Vagrant - Main site"
