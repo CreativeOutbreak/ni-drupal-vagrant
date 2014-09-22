@@ -6,10 +6,13 @@ mysql:
     database: drupal
     username: root
     encoding: utf8
+before_install:
+  - composer self-update
+  - pear channel-discover pear.drush.org
+install:
+  - pear install drush/drush
+  - phpenv rehash
 before_script:
-    - pyrus channel-discover pear.drush.org
-    - pyrus install drush/drush
-    - phpenv rehash
     - drush dl --yes drupal
     - cd drupal-*
     - drush si standard --db-url=mysql://root:@localhost/drupal --yes
