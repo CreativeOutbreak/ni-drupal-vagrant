@@ -36,7 +36,8 @@
     "recipe[vdd::vim]",
     "recipe[vdd::patchutils]",
     "recipe[vdd::siege]",
-    "recipe[vdd_example]"
+    "recipe[vdd_example::default]",
+    "recipe[vdd_example::drupal7]"
   ],
   "description": "Installs Drupal development environment.",
   "chef_type": "role"

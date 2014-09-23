@@ -1,0 +1,1 @@
+# Install drush-master, required for drush with D8 sites.git "/home/vagrant/sites/drupal7/test" do  repository "https://github.com/drush-ops/drush.git"  reference "master"  action :syncend
