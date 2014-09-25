@@ -36,8 +36,13 @@
     "recipe[vdd::vim]",
     "recipe[vdd::patchutils]",
     "recipe[vdd::siege]",
-    "recipe[vdd_example::default]",
-    "recipe[vdd_example::drupal7]"
+    "recipe[vdd_example]",
+    "recipe[drupal_setup]",
+    "recipe[java]",
+    "recipe[solr]",
+    "recipe[build-essential]",
+    "recipe[postgresql]",
+    "recipe[postgresql::server_debian]"
   ],
   "description": "Installs Drupal development environment.",
   "chef_type": "role"

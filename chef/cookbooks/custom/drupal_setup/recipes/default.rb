@@ -1,0 +1,1 @@
+#log "******   Drupal Setup Loaded! ******"bash "print_logo" do  user "root"  code "echo 'Hello Bash'"end
