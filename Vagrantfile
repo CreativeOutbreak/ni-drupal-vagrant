@@ -49,6 +49,7 @@ Vagrant.configure("2") do |config|
     chef.data_bags_path = "chef/data_bags"
     chef.roles_path = "chef/roles"
     chef.add_role "vdd"
+    #chef.arguments = "-l debug"
   end
 
   # Run final shell script.

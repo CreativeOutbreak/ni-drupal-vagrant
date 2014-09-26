@@ -7,6 +7,10 @@
         "host_path": "data/",
         "guest_path": "/var/www",
         "type": "nfs"
+      },
+      {
+        "host_path": "nidata/",
+        "guest_path": "/var/nidata"
       }
     ],
     "forwarded_ports": []

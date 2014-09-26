@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-log "Installing Build Essentials"
+#log "Installing Build Essentials"
 
 begin
   include_recipe "build-essential::_#{node['platform_family']}"
