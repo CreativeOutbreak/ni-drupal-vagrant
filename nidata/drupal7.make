@@ -14,13 +14,13 @@ projects[facetapi][version] = "1.5"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
-; projects[tests][download][type] = ""
-; projects[tests][download][url] = ""
-; projects[tests][type] = "module"
+projects[tests][download][type] = ""
+projects[tests][download][url] = ""
+projects[tests][type] = "module"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
-; projects[psr_0_test][download][type] = ""
-; projects[psr_0_test][download][url] = ""
-; projects[psr_0_test][type] = "module"
+projects[psr_0_test][download][type] = ""
+projects[psr_0_test][download][url] = ""
+projects[psr_0_test][type] = "module"
 

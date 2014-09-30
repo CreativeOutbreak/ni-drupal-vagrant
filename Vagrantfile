@@ -52,6 +52,9 @@ Vagrant.configure("2") do |config|
     #chef.arguments = "-l debug"
   end
 
+  # Run modulesetup shell script.
+  config.vm.provision :shell, :path => "chef/shell/modulesetup.sh", :args => config_json["vdd"]["sites"]["drupal7"]["modules"]
+
   # Run final shell script.
   config.vm.provision :shell, :path => "chef/shell/final.sh", :args => config_json["vm"]["ip"]
 

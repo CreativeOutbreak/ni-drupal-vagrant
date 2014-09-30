@@ -36,8 +36,6 @@
     "recipe[vdd::vim]",
     "recipe[vdd::patchutils]",
     "recipe[vdd::siege]",
-    "recipe[vdd_example]",
-    "recipe[drupal_setup]",
     "recipe[java]",
     "recipe[solr]",
     "recipe[build-essential]",

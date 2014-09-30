@@ -10,7 +10,7 @@
       },
       {
         "host_path": "nidata/",
-        "guest_path": "/var/nidata"
+        "guest_path": "/nidata"
       }
     ],
     "forwarded_ports": []
@@ -39,7 +39,12 @@
           "document_root": "drupal7",
           "url": "drupal7.dev",
           "alias": ["www.drupal7.dev"]
-        }
+        },
+        "modules": [
+          "apachesolr facetapi migrate ctools",
+          "overlay", 
+          "apachesolr_access apachesolr apachesolr_search current_search facetapi migrate_newint"
+        ]
       }
     }
   }
