@@ -58,4 +58,9 @@ Vagrant.configure("2") do |config|
   # Run final shell script.
   config.vm.provision :shell, :path => "chef/shell/final.sh", :args => config_json["vm"]["ip"]
 
+  # Trigger clean up on destroy
+  config.trigger.after :destroy, :stdout => true do
+    run "chef/shell/cleanup.sh"
+  end
+
 end

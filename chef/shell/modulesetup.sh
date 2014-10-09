@@ -11,10 +11,6 @@ echo "Make sure we're in the right directory"
 cd /var/www/drupal7
 
 # Setup Drupal
-echo "Changing permissions"
-chmod -R 777 .
-echo "Removing old files"
-rm -Rf * .*
 echo "Cloning Drupal7 repo"
 git clone --branch 7.x http://git.drupal.org/project/drupal.git .
 echo "Drush installing site"

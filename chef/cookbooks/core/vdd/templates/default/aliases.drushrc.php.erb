@@ -14,6 +14,14 @@ $aliases['<%= index %>'] = array(
         'database' => '<%= index %>',
       ),
     ),
+    'legacy' => array (
+      'default' => array (
+        'driver' => 'pgsql',
+        'username' => 'postgres',
+        'password' => 'root', //'<%= node["postgresql"]["password"]["postgres"] %>',
+        'database' => 'postgres',
+      ),
+    ),
   ),
   'command-specific' => array(
     'site-install' => array(
