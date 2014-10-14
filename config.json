@@ -40,6 +40,16 @@
           "url": "drupal7.dev",
           "alias": ["www.drupal7.dev"]
         },
+        "databases": {
+          "legacy": [
+            "name: legacy",
+            "username: postgres",
+            "password: root",
+            "host: localhost",
+            "drivers: psql",
+            "database: newint2"
+          ]
+        },
         "modules": [
           "apachesolr facetapi migrate ctools",
           "overlay", 

@@ -1,6 +1,0 @@
-*.bk
-xml/
-xml/*
-includes/tagsXML.inc
-includes/tags.inc
-includes/blogSQL.inc
