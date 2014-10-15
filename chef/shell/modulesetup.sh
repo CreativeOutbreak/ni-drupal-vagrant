@@ -6,21 +6,41 @@ NI_DIR="/nidata"
 cat "$NI_DIR/nilogo.txt"
 
 
-# Enable and Disable Drupal Modules.
-echo "Make sure we're in the right directory"
-cd /var/www/drupal7
-
 # Setup Drupal
 echo "Cloning Drupal7 repo"
-git clone --branch 7.x http://git.drupal.org/project/drupal.git .
+
+DIR="$NI_DIR/drupal7"
+
+if [ -d "$DIR" ]; then
+  # look for empty dir
+  cd $DIR 
+  if [ "$(ls -A $DIR)" ]; then
+    git pull
+  else
+    git clone --branch 7.x http://git.drupal.org/project/drupal.git .
+  fi
+else
+  mkdir $DIR
+  cd $DIR
+  git clone --branch 7.x http://git.drupal.org/project/drupal.git .
+fi
+
+cp -R "$DIR/." /var/www/drupal7/. 
+
+#git clone --branch 7.x http://git.drupal.org/project/drupal.git .
 echo "Drush installing site"
-drush @drupal7 si standard -ydv
+drush @drupal7 si standard -y
 # echo "Running drush make file --no-core"
 # drush make /nidata/drupal7.make --no-core -y
 
 
 echo "Copy custom module to drupal install"
 cp -R /nidata/custom_modules /var/www/drupal7/sites/all/modules/
+
+# Enable and Disable Drupal Modules.
+echo "Make sure we're in the right directory"
+cd /var/www/drupal7
+
 
 echo "Download selected modules"
 for dl in $1

@@ -2,42 +2,51 @@
 
 NI_DIR="/nidata"
 
+echo "cat logo"
 # Branding...
 cat "$NI_DIR/nilogo.txt"
 
+#sudo adduser newint2
+#sudo chpasswd << 'END'
+#newint2:root
+#END
+echo "su to postgres"
+su - postgres
 
-# Enable and Disable Drupal Modules.
-#echo "Make sure we're in the right directory"
-#cd /var/www/drupal7
+echo "cat sql to psql"
+cat "$NI_DIR/psql.txt" | psql
 
-# Setup Drupal
-#echo "Cloning Drupal7 repo"
-#git clone --branch 7.x http://git.drupal.org/project/drupal.git .
-#echo "Drush installing site"
-#drush @drupal7 si standard -ydv
-# echo "Running drush make file --no-core"
-# drush make /nidata/drupal7.make --no-core -y
+echo "exit postgres user"
+#exit
+
+echo "su to newint2"
+su - newint2
+
+echo "populate newint2 db with data"
+psql newint2 < $NI_DIR/newint2.sql
 
 
-#echo "Copy custom module to drupal install"
-#cp -R /nidata/custom_modules /var/www/drupal7/sites/all/modules/
+echo "run command to update settings.php"
+IFS=" " read -a fields <<< "$1"
 
-#echo "Download selected modules"
-for dbconf in $1
-do
-  echo $dbconf
+s='$databases['
+d=''
+e='),);'
+a=''
+for (( i=0 ; i < ${#fields[@]} ; i++ )) ; do
+    f=${fields[i]}
+    IFS=: read -a vals <<< "$f"
+    key=${vals[0]}
+    if [ "$key" = "name" ]; then
+      s=$s"'${vals[1]}'] => array('default' => array("
+    else
+      d=$d"'${vals[0]}' => '${vals[1]}',"
+    fi 
+    last=$(( i+1 == ${#fields[@]} ))
+    if [ last ]; then
+      a=$s$d$e
+    fi
 done
-
-#echo "Disabling selected modules"
-#for dis in $2
-#do
-#  drush dis $dis -y
-#done
-
-#echo "Enabling selected modules"
-#for en in $3
-#do
-#  drush en $en -y
-#done
-
+chmod 777 /var/www/drupal7/sites/default/settings.php 
+echo $a >> /var/www/drupal7/sites/default/settings.php
 

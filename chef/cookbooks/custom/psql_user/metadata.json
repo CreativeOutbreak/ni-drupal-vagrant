@@ -1,0 +1,11 @@
+{
+  "name": "psql_user",
+  "description": "Setup psql user",
+  "license": "GPL v3",
+  "platforms": {
+    "ubuntu": ">= 0.0.0"
+  },
+  "dependencies": {
+    "vdd": ">= 0.0.0"
+  }
+}

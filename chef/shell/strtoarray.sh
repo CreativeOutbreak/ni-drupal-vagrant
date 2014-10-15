@@ -5,26 +5,22 @@ str='name:legacy username:postgres password:root host:localhost drivers:pgsql'
 
 IFS=" " read -a fields <<< "$str"
 
-data='$databases['
-
+s='$databases['
+d=''
+e='),);'
+a=''
 for (( i=0 ; i < ${#fields[@]} ; i++ )) ; do
     f=${fields[i]}
     IFS=: read -a vals <<< "$f"
     key=${vals[0]}
     if [ "$key" = "name" ]; then
-      data=$data"${vals[1]}'] => array("
+      s=$s"${vals[1]}'] => array('default' => array("
     else
-      data=$data"'${vals[0]}' => '${vals[1]}',"
+      d=$d"'${vals[0]}' => '${vals[1]}',"
     fi 
-    #notfirst=$(( i>0 ))
-    #last=$(( i+1 == ${#fields[@]} ))
-
-    #(( notfirst )) && echo -n "' => '"${f% *}"', "$'\n'
-    #(( !last )) && echo -n "'"${f##* }
-    #echo "$f"
-    #(( last )) && echo $i
-    #start=('' $'\n' ' ')
-    #colon=('' ': ')
-    #echo -n "${start[notfirst + last]}  dsd sd  ${f##* } => ${colon[!last]}"
+    last=$(( i+1 == ${#fields[@]} ))
+    if [ last ]; then
+      a=$s$d$e
+    fi
 done
-echo $data
+echo $a
