@@ -10,20 +10,34 @@ cat "$NI_DIR/nilogo.txt"
 #sudo chpasswd << 'END'
 #newint2:root
 #END
-echo "su to postgres"
-su - postgres
+#echo "check current user whoami"
+#whoami
 
-echo "cat sql to psql"
-cat "$NI_DIR/psql.txt" | psql
+#echo "check current user ps"
+#ps -o user= -p $$ | awk '{print $1}'
 
-echo "exit postgres user"
+#echo "su to postgres"
+#su - postgres && whoami
+
+#echo "check current user whoami"
+#whoami
+
+#echo "check current user ps"
+#ps -o user= -p $$ | awk '{print $1}'
+
+#echo "cat sql to psql"
+#cat "$NI_DIR/psql.txt" | sudo psql -U postgres -h localhost
+
+#echo "exit postgres user"
 #exit
 
-echo "su to newint2"
-su - newint2
+#echo "su to newint2"
+#su - newint2
+cp "$NI_DIR/.pgpass" ~/
+chmod 0600 ~/.pgpass
 
 echo "populate newint2 db with data"
-psql newint2 < $NI_DIR/newint2.sql
+psql newint2 -h localhost -p 5432 -U postgres < $NI_DIR/newint2.sql
 
 
 echo "run command to update settings.php"
