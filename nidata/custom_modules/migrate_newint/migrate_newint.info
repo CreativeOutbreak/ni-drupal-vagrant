@@ -18,7 +18,7 @@ files[] = includes/blogArticleSQL.inc
 files[] = includes/tagsSQL.inc
 files[] = includes/blogArticleRevisionSQL.inc
 files[] = includes/usersSQL.inc
-files[] = includes/commentUserSQL.inc
+;files[] = includes/commentUserSQL.inc
 
 ; For testing table_copy plugin. Since is infrequently used, we comment it out.
 ; files[] = example.table_copy.inc

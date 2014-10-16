@@ -15,7 +15,7 @@ if [ -d "$DIR" ]; then
   # look for empty dir
   cd $DIR 
   if [ "$(ls -A $DIR)" ]; then
-    git pull
+    git pull origin 7.x
   else
     git clone --branch 7.x http://git.drupal.org/project/drupal.git .
   fi
@@ -60,4 +60,7 @@ do
   drush en $en -y
 done
 
-
+echo "patching migrate module"
+cd /vagrant/data/drupal7/sites/all/modules/migrate/
+wget https://www.drupal.org/files/issues/noderevision-1298724-24.patch
+patch -p1 < noderevision-1298724-24.patch 

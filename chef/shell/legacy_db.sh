@@ -25,16 +25,17 @@ cat "$NI_DIR/nilogo.txt"
 #echo "check current user ps"
 #ps -o user= -p $$ | awk '{print $1}'
 
-#echo "cat sql to psql"
-#cat "$NI_DIR/psql.txt" | sudo psql -U postgres -h localhost
+cp "$NI_DIR/.pgpass" ~/
+chmod 0600 ~/.pgpass
+
+echo "cat sql to psql"
+cat "$NI_DIR/psql.txt" | sudo psql -U postgres -h localhost
 
 #echo "exit postgres user"
 #exit
 
 #echo "su to newint2"
 #su - newint2
-cp "$NI_DIR/.pgpass" ~/
-chmod 0600 ~/.pgpass
 
 echo "populate newint2 db with data"
 psql newint2 -h localhost -p 5432 -U postgres < $NI_DIR/newint2.sql
@@ -52,7 +53,7 @@ for (( i=0 ; i < ${#fields[@]} ; i++ )) ; do
     IFS=: read -a vals <<< "$f"
     key=${vals[0]}
     if [ "$key" = "name" ]; then
-      s=$s"'${vals[1]}'] => array('default' => array("
+      s=$s"'${vals[1]}'] = array('default' => array("
     else
       d=$d"'${vals[0]}' => '${vals[1]}',"
     fi 
