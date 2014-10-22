@@ -41,6 +41,9 @@ Vagrant.configure("2") do |config|
   # Run initial shell script.
   config.vm.provision :shell, :path => "chef/shell/initial.sh"
 
+  # Run legacy db setup shell script.
+  config.vm.provision :shell, :path => "chef/shell/legacy_db.sh"
+
   # Customize provisioner.
   config.vm.provision :chef_solo do |chef|
     chef.json = config_json
@@ -58,7 +61,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, :path => "chef/shell/modulesetup.sh", :args => config_json["vdd"]["sites"]["drupal7"]["modules"]
 
   # Run legacy db setup shell script.
-  config.vm.provision :shell, :path => "chef/shell/legacy_db.sh", :args => config_json["vdd"]["sites"]["drupal7"]["databases"]
+  config.vm.provision :shell, :path => "chef/shell/drupal_settings.sh", :args => config_json["vdd"]["sites"]["drupal7"]["databases"]
 
   # Run final shell script.
   config.vm.provision :shell, :path => "chef/shell/final.sh", :args => config_json["vm"]["ip"]

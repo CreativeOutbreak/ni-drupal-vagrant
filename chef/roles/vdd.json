@@ -21,8 +21,6 @@
     "recipe[apache2]",
     "recipe[mysql::client]",
     "recipe[mysql::server]",
-    "recipe[postgresql::client]",
-    "recipe[postgresql::server]",
     "recipe[vdd::apache]",
     "recipe[vdd::graphviz]",
     "recipe[vdd::vdd_sites]",
@@ -44,7 +42,6 @@
     "recipe[vdd::vim]",
     "recipe[vdd::patchutils]",
     "recipe[vdd::siege]",
-    "recipe[postgresql::server_debian]",
     "recipe[psql_user]"
     ],
   "description": "Installs Drupal development environment.",

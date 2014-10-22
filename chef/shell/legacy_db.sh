@@ -25,11 +25,11 @@ cat "$NI_DIR/nilogo.txt"
 #echo "check current user ps"
 #ps -o user= -p $$ | awk '{print $1}'
 
-cp "$NI_DIR/.pgpass" ~/
-chmod 0600 ~/.pgpass
+#cp "$NI_DIR/.pgpass" ~/
+#chmod 0600 ~/.pgpass
 
-echo "cat sql to psql"
-cat "$NI_DIR/psql.txt" | sudo psql -U postgres -h localhost
+#echo "cat sql to psql"
+#cat "$NI_DIR/psql.txt" | sudo psql -U postgres -h localhost
 
 #echo "exit postgres user"
 #exit
@@ -37,31 +37,26 @@ cat "$NI_DIR/psql.txt" | sudo psql -U postgres -h localhost
 #echo "su to newint2"
 #su - newint2
 
-echo "populate newint2 db with data"
-psql newint2 -h localhost -p 5432 -U postgres < $NI_DIR/newint2.sql
+#echo "populate newint2 db with data"
+#psql newint2 -h localhost -p 5432 -U postgres < $NI_DIR/newint2.sql
 
 
-echo "run command to update settings.php"
-IFS=" " read -a fields <<< "$1"
+sudo locale-gen en_US.UTF-8
 
-s='$databases['
-d=''
-e='),);'
-a=''
-for (( i=0 ; i < ${#fields[@]} ; i++ )) ; do
-    f=${fields[i]}
-    IFS=: read -a vals <<< "$f"
-    key=${vals[0]}
-    if [ "$key" = "name" ]; then
-      s=$s"'${vals[1]}'] = array('default' => array("
-    else
-      d=$d"'${vals[0]}' => '${vals[1]}',"
-    fi 
-    last=$(( i+1 == ${#fields[@]} ))
-    if [ last ]; then
-      a=$s$d$e
-    fi
-done
-chmod 777 /var/www/drupal7/sites/default/settings.php 
-echo $a >> /var/www/drupal7/sites/default/settings.php
+sudo update-locale LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8 LC_NUMERIC=en_US.UTF-8 LC_TIME=en_US.UTF-8 LC_COLLATE=en_US.UTF-8 LC_MONETARY=en_US.UTF-8 LC_MESSAGES=en_US.UTF-8 LC_PAPER=en_US.UTF-8 LC_NAME=en_US.UTF-8 LC_ADDRESS=en_US.UTF-8 LC_TELEPHONE=en_US.UTF-8 LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=en_US.UTF-8 LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8 LC_NUMERIC=en_US.UTF-8 LC_TIME=en_US.UTF-8 LC_COLLATE=en_US.UTF-8 LC_MONETARY=en_US.UTF-8 LC_MESSAGES=en_US.UTF-8 LC_PAPER=en_US.UTF-8 LC_NAME=en_US.UTF-8 LC_ADDRESS=en_US.UTF-8 LC_TELEPHONE=en_US.UTF-8 LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=en_US.UTF-8 LC_ALL=en_US.UTF-8
+
+sudo apt-get install postgresql-9.1 -y
+
+sudo -u postgres pg_dumpall > /tmp/postgres.sql
+
+sudo pg_dropcluster --stop 9.1 main
+
+sudo pg_createcluster --locale en_US.UTF-8 --start 9.1 main
+
+sudo -u postgres psql -f /tmp/postgres.sql
+
+cat /nidata/psql.txt | sudo -u postgres psql
+
+cat /nidata/newint2.sql | sudo -u postgres psql newint2
 
