@@ -3,24 +3,16 @@
 NI_DIR="/nidata"
 
 # Branding...
-cat "$NI_DIR/nilogo.txt"
+#cat "$NI_DIR/nilogo.txt"
 
+
+echo "Copy custom module to drupal install"
+cp -R /nidata/custom_modules /var/www/drupal7/sites/all/modules/
 
 # Enable and Disable Drupal Modules.
 echo "Make sure we're in the right directory"
 cd /var/www/drupal7
 
-# Setup Drupal
-echo "Cloning Drupal7 repo"
-git clone --branch 7.x http://git.drupal.org/project/drupal.git .
-echo "Drush installing site"
-drush @drupal7 si standard -ydv
-# echo "Running drush make file --no-core"
-# drush make /nidata/drupal7.make --no-core -y
-
-
-echo "Copy custom module to drupal install"
-cp -R /nidata/custom_modules /var/www/drupal7/sites/all/modules/
 
 echo "Download selected modules"
 for dl in $1
@@ -40,4 +32,14 @@ do
   drush en $en -y
 done
 
+echo "patching migrate module"
+cd /vagrant/data/drupal7/sites/all/modules/migrate/
+wget https://www.drupal.org/files/issues/noderevision-1298724-24.patch
+patch -p1 < noderevision-1298724-24.patch
 
+
+echo "migrate tags"
+drush @drupal7 mi NewIntTermSQL
+
+echo "join other tables"
+cat /nidata/second_join_views.sql | sudo -u newint2 psql newint2

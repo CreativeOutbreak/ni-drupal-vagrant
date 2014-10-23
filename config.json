@@ -46,7 +46,7 @@
         "modules": [
           "apachesolr facetapi migrate ctools",
           "overlay", 
-          "apachesolr_access apachesolr apachesolr_search current_search facetapi migrate_newint"
+          "apachesolr_access apachesolr apachesolr_search current_search facetapi migrate_newint migrate_ui"
         ]
       }
     }
