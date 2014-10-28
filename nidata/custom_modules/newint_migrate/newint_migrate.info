@@ -1,4 +1,4 @@
-name = "Migrate NewInt"
+name = "Newint Migrate"
 description = "New Internationalist data migration"
 package = "Development"
 core = 7.x
@@ -12,7 +12,7 @@ dependencies[] = number
 ;node_reference is useful but not required
 ; dependencies[] = node_reference
 
-files[] = migrate_newint.module
+files[] = newint_migrate.module
 files[] = includes/abstracts.inc
 files[] = includes/blogArticleSQL.inc
 files[] = includes/tagsSQL.inc

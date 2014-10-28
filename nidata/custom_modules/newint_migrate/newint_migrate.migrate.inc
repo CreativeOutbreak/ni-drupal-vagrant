@@ -39,10 +39,10 @@ function migrate_newint_migrate_api() {
                 'class_name' => 'NewIntBlogArticleRevisionSQLMigration',
                 'group_name' => 'blog',
             ),
-            'NewIntCommentUserSQL' => array(
+            /*'NewIntCommentUserSQL' => array(
                 'class_name' => 'NewIntCommentUserSQLMigration',
                 'group_name' => 'blog',
-            ),
+            ),*/
         ),
 
     );
