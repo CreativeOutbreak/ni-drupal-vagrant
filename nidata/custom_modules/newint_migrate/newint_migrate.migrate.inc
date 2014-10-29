@@ -14,7 +14,7 @@
  * method of letting them get automatically registered on a cache clear will
  * break in certain environments (see http://drupal.org/node/1778952).
  */
-function migrate_newint_migrate_api() {
+function newint_migrate_migrate_api() {
     $api = array(
         'api' => 2,
         'groups' => array(
