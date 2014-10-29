@@ -37,11 +37,4 @@ cd /vagrant/data/drupal7/sites/all/modules/migrate/
 wget https://www.drupal.org/files/issues/noderevision-1298724-24.patch
 patch -p1 < noderevision-1298724-24.patch
 
-echo "Clear Cache for drupal7"
-drush @drupal7 cc all
 
-echo "migrate tags"
-drush @drupal7 mi NewIntTermSQL
-
-echo "join other tables"
-cat /nidata/second_join_views.sql | sudo -u newint2 psql newint2

@@ -65,10 +65,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, :path => "chef/shell/d7modules.sh", :args => config_json["vdd"]["sites"]["drupal7"]["modules"]
 
 
-  # Run modulesetup shell script.
-  #config.vm.provision :shell, :path => "chef/shell/modulesetup.sh", :args => config_json["vdd"]["sites"]["drupal7"]["modules"]
-
-  # Run legacy db setup shell script.
+    # Run legacy db setup shell script.
   config.vm.provision :shell, :path => "chef/shell/drupal_settings.sh", :args => config_json["vdd"]["sites"]["drupal7"]["databases"]
 
   # Run final shell script.
