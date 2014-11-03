@@ -34,7 +34,7 @@ done
 
 echo "patching migrate module"
 cd /vagrant/data/drupal7/sites/all/modules/migrate/
-wget https://www.drupal.org/files/issues/noderevision-1298724-24.patch
-patch -p1 < noderevision-1298724-24.patch
+wget https://www.drupal.org/files/noderevision-1298724-14.patch
+patch -p1 < noderevision-1298724-14.patch
 
 
