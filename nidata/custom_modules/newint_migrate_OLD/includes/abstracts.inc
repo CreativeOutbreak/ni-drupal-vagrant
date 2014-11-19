@@ -5,13 +5,11 @@
  * Basic abstract classes to be inherited from 
  */
 
-
 abstract class NewIntMigration extends Migration {
     protected $psql_table;
     protected $psql_alias;
     protected $psql_fields = array('id');
     protected $psql_query;
-    protected $psql_joins = array();
     public function __construct($group) {
          
         parent::__construct(MigrateGroup::getInstance('blog')); //NULL); //array($group));
@@ -34,10 +32,6 @@ abstract class NewIntPSQLMigration extends NewIntMigration {
         if(isset($this->psql_table) && isset($this->psql_alias)) { 
             $this->psql_query = $this->getConnection()->select($this->psql_table, $this->psql_alias)
                 ->fields($this->psql_alias, $this->psql_fields);
-
-            if(!empty($this->psql_joins)) {
-                // buid joins
-            }
         } 
         $count_query = $this->getConnection()->select($this->psql_table, $this->psql_alias);
         $count_query->addExpression('COUNT(*)', 'cnt');

@@ -6,32 +6,15 @@
  * 
  */
 
-//include "classes.inc";
 
-class NewIntUserSQLMigration extends NewIntMigration {
+class NewIntCommentUserSQLMigration extends NewIntMigrateComment {
     public $ulist = array(); 
     public function __construct() {
-        $this->description = 'Pull users from legacy database that has been created from newint bricolage system';
-        $this->psql_table = 'person';
-        $this->psql_alias = 't1';
-        $this->psql_fields = array('id', 'prefix', 'fname', 'mname', 'lname', 'suffix', 'active');
+        $this->description = 'Pull users from comments database that has been created from newint commenting system';
+        $this->mysql_table = 'users';
+        $this->mysql_alias = 'u';
+        $this->mysql_fields = array('id', 'display_name', 'real_name', 'email_address');
         parent::__construct(MigrateGroup::getInstance('blog'));
-        
-        $this->psql_query = $this->getConnection()->select($this->psql_table, $this->psql_alias)
-                ->fields($this->psql_alias, $this->psql_fields);
-
-        $this->psql_query->leftJoin('usr', 't2', "t1.id = t2.id");
-        $this->psql_query->fields('t2', array('login', 'password'));
-        
-        $this->psql_query->leftJoin('person__contact_value', 't3', "t1.id = t3.person__id");
-        //$this->psql_query->addField('t9', 'destid1', 'nid');
-        
-        
-        $this->psql_query->addExpression('left join (select * from contact_value where contact__id < 3) t4 on t3.contact_value__id = t4.id');
-        $this->psql_query->addField('t4', 'value', 'email');
-
-        $this->source = new MigrateSourceSQL($this->psql_query, array(), NULL, array('map_joinable' => FALSE));
-
 
         $this->destination = new MigrateDestinationUser();
         
@@ -40,23 +23,22 @@ class NewIntUserSQLMigration extends NewIntMigration {
                 'type' => 'int',
                 'not null' => TRUE,
                 'description' => 'NI ID reference.',
-                'alias' => $this->psql_alias,
+                'alias' => $this->mysql_alias,
                 )
              ),
-            MigrateDestinationUser::getKeySchema(),
-            'legacy'
+            MigrateDestinationUser::getKeySchema()
         );
         
-        $this->addFieldMapping('field_first_name', 'fname');
-        $this->addFieldMapping('field_last_name', 'lname');
+        $this->addFieldMapping('field_first_name', 'real_name');
+        $this->addFieldMapping('field_last_name', 'real_name');
 
-        $this->addFieldMapping('name', 'login');
-        $this->addFieldMapping('mail', 'email');
+        $this->addFieldMapping('name', 'display_name');
+        $this->addFieldMapping('mail', 'email_address');
 
-        $this->addFieldMapping('pass', 'password');
+        $this->addFieldMapping('pass', NULL);
         
-        $this->addFieldMapping('role_names', 'active')
-            ->defaultValue(t('contributor'));
+        $this->addFieldMapping('role_names', NULL)
+            ->defaultValue(t('registered_user'));
 
         // We conditionally DNM these fields, so your field mappings will be clean
         // whether or not you have path and or pathauto enabled
@@ -68,7 +50,7 @@ class NewIntUserSQLMigration extends NewIntMigration {
             }
         }*/
 
-        $this->addFieldMapping('status')
+       /* $this->addFieldMapping('status')
             ->issueGroup(t('DNM'));
         $this->addFieldMapping('created')
             ->issueGroup(t('DNM'));
@@ -102,24 +84,17 @@ class NewIntUserSQLMigration extends NewIntMigration {
             ->issueGroup(t('DNM'));
         $this->addFieldMapping('path')
             ->issueGroup(t('DNM'));
+        */
     
     }
     public function prepareRow($row) {
 
-        if(empty($row->password)) {
-            $row->active = 'contributor';
-        }
-        else {
-            $row->active = 'administrator';
-        }
-  
-        $row->password = '320noapr';
         if(empty($row->email)) {
             $row->email = "example@example.com";
         }
         $login = "";
-        if(!empty($row->login)) {
-            $login = $row->login;
+        if(!empty($row->display_name)) {
+            $login = strtolower(str_replace(" ", ".", $row->display_name));
             if(isset($this->ulist[$login])) {
                 $this->ulist[$login] += 1;
                 $login .= $this->ulist[$login];
@@ -127,17 +102,11 @@ class NewIntUserSQLMigration extends NewIntMigration {
             else {
                 $this->ulist[$login] = 0;
             }
-            $row->login = $login;
+            $row->display_name = $login;
         }
         else {
         
-            if(!empty($row->fname)) {
-                $login = trim(strtolower($row->fname));
-            }
-            if(!empty($row->lname)) {
-                $login .= ".".trim(strtolower($row->lname));
-            }
-            if($login === ""){ $login = "Anonymous"; }
+            if($row->real_name === ""){ $login = "anonymous"; }
             $login = str_replace(" ", "", preg_replace('/[[:^print:]]/', '', $login));
             if(isset($this->ulist[$login])) {
                 $this->ulist[$login] += 1;
@@ -146,7 +115,7 @@ class NewIntUserSQLMigration extends NewIntMigration {
             else {
                 $this->ulist[$login] = 0;
             }
-            $row->login = $login;    
+            $row->display_name = $login;    
         }
          
      return TRUE;
@@ -154,7 +123,7 @@ class NewIntUserSQLMigration extends NewIntMigration {
 
     public function prepare($user, stdClass $row) {
         // Let's pretend we couldn't have done this as easily in prepareRow...
-        $user->field_display_name['und'][0]['value'] =  $row->fname.' '.$row->lname;
+        $user->field_display_name['und'][0]['value'] =  $row->real_name;
     }
 }
 

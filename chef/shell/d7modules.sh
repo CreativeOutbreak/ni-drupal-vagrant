@@ -6,8 +6,8 @@ NI_DIR="/nidata"
 #cat "$NI_DIR/nilogo.txt"
 
 
-echo "Copy custom module to drupal install"
-cp -R /nidata/custom_modules /var/www/drupal7/sites/all/modules/
+echo "soft link custom module to drupal install"
+ln -s /nidata/custom_modules /var/www/drupal7/sites/all/modules/custom_modules
 
 # Enable and Disable Drupal Modules.
 echo "Make sure we're in the right directory"
