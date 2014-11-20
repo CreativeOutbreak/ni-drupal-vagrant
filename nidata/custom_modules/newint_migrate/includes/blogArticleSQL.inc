@@ -38,8 +38,8 @@ class NewIntBlogArticleSQLMigration extends NewIntMigration {
             MigrateDestinationNode::getKeySchema(),
             'legacy'
         );
-
-
+        //db_set_active('legacy');
+        //db_query("CREATE VIEW {blaa} AS SELECT * FROM {person}");
 
 
         $this->addFieldMapping('title', 'name');

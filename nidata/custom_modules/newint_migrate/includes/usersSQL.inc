@@ -16,22 +16,23 @@ class NewIntUserSQLMigration extends NewIntMigration {
         $this->psql_alias = 't1';
         $this->psql_fields = array('id', 'prefix', 'fname', 'mname', 'lname', 'suffix', 'active');
         parent::__construct(MigrateGroup::getInstance('blog'));
-        
-        $this->psql_query = $this->getConnection()->select($this->psql_table, $this->psql_alias)
-                ->fields($this->psql_alias, $this->psql_fields);
+       
 
+        $this->psql_query = $this->getConnection()->select($this->psql_table, $this->psql_alias)
+            ->fields($this->psql_alias, $this->psql_fields);
+        
+       
         $this->psql_query->leftJoin('usr', 't2', "t1.id = t2.id");
         $this->psql_query->fields('t2', array('login', 'password'));
         
         $this->psql_query->leftJoin('person__contact_value', 't3', "t1.id = t3.person__id");
-        //$this->psql_query->addField('t9', 'destid1', 'nid');
+       
+        $this->psql_query->leftJoin('contact_value', 't4', "t3.contact_value__id = t4.id");
         
-        
-        $this->psql_query->addExpression('left join (select * from contact_value where contact__id < 3) t4 on t3.contact_value__id = t4.id');
         $this->psql_query->addField('t4', 'value', 'email');
 
         $this->source = new MigrateSourceSQL($this->psql_query, array(), NULL, array('map_joinable' => FALSE));
-
+        
 
         $this->destination = new MigrateDestinationUser();
         

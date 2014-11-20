@@ -10,5 +10,10 @@ function newint_migrate_install() {
     'machine_name' => 'newint_tags',
   );
  
-  taxonomy_vocabulary_save($new_vocab); 
+  taxonomy_vocabulary_save($new_vocab);
+
+  /**
+  * Create email view in legacy db
+  */
+  $dbconn = Database::getConnection('default','legacy');
 }
