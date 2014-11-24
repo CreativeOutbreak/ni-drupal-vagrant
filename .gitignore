@@ -1,0 +1,10 @@
+.vagrant
+.vagrant*
+config.yml
+parrot-config/solr/*
+parrot-config/php/parrot-local.ini
+sites/*
+.DS_Store
+tmp/*
+databases/*
+.idea/*

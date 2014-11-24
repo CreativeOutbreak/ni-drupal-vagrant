@@ -1,0 +1,19 @@
+<?php
+
+/**
+* Implements hook_install().
+*/
+function newint_migrate_install() {
+  $new_vocab = (object) array(
+    'name' => 'Newint Tags',
+    'description' => 'this is the tags from newint legacy system',
+    'machine_name' => 'newint_tags',
+  );
+ 
+  taxonomy_vocabulary_save($new_vocab);
+
+  /**
+  * Create email view in legacy db
+  */
+  $dbconn = Database::getConnection('default','legacy');
+}
